@@ -20,9 +20,17 @@ module.exports = function (fp) {
 	} else if (exists.sync(circle)) {
 		var circleObj = yaml.load(circle)
 		if (circleObj.test.override) {
-			return circleObj.test.override.map(function (line) {
-				return line.match(/use\s+(.*)\s+&&/)[1]
+			var versions = []
+			circleObj.test.override.every(function (line) {
+				const matched = line.match(/use\s+(.*)\s+&&/)
+				if (matched && matched[1]) {
+					versions.push(matched[1])
+					return true
+				}
+				versions = null
+				return false
 			})
+			return versions
 		}
 		var version = circleObj.machine &&
 			circleObj.machine.node &&

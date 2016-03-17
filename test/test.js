@@ -20,3 +20,8 @@ test('nothing', t => {
 	const v = toc('../../')
 	t.notOk(v)
 })
+
+test('circle but no version found', t => {
+	const v = toc('./circle-invalid')
+	t.notOk(v)
+})
