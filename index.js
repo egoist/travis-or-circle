@@ -22,7 +22,7 @@ module.exports = function (fp) {
 		if (circleObj.test.override) {
 			var versions = []
 			circleObj.test.override.every(function (line) {
-				const matched = line.match(/use\s+(.*)\s+&&/)
+				var matched = line.match(/use\s+(.*)\s+&&/)
 				if (matched && matched[1]) {
 					versions.push(matched[1])
 					return true
